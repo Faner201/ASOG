@@ -1,0 +1,20 @@
+# Backend
+/.env
+/public/storage
+/vendor
+
+# Development software
+/.idea
+/.phpstorm.meta.php
+/.vagrant
+/_ide_helper.php
+/_ide_helper_models.php
+/Homestead.json
+/Homestead.yaml
+/.php-cs-fixer.cache
+/.php-codesniffer.cache
+/.vscode
+
+# OS generated files
+.DS_Store
+
