@@ -43,44 +43,44 @@ services:
 
     App\Service\CorrectorAdvertising\TokenRule\SignExtractionRule:
         tags:
-            - { name: 'app.corrector.token_rule', priority: 600 }
+            - { name: 'app.corrector.token_rule'}
 
     App\Service\CorrectorAdvertising\TokenRule\EmptyCoreRule:
         tags:
-            - { name: 'app.corrector.token_rule', priority: 500 }
+            - { name: 'app.corrector.token_rule'}
 
     App\Service\CorrectorAdvertising\TokenRule\NormalizedCoreRule:
         tags:
-            - { name: 'app.corrector.token_rule', priority: 400 }
+            - { name: 'app.corrector.token_rule'}
 
     App\Service\CorrectorAdvertising\TokenRule\NegationRule:
         tags:
-            - { name: 'app.corrector.token_rule', priority: 300 }
+            - { name: 'app.corrector.token_rule'}
 
     App\Service\CorrectorAdvertising\TokenRule\DuplicateFilterRule:
         tags:
-            - { name: 'app.corrector.token_rule', priority: 200 }
+            - { name: 'app.corrector.token_rule'}
 
     App\Service\CorrectorAdvertising\TokenRule\PositiveFormattingRule:
         tags:
-            - { name: 'app.corrector.token_rule', priority: 100 }
+            - { name: 'app.corrector.token_rule'}
 
     App\Service\CorrectorAdvertising\TokenRule\TokenCharacterFilter:
         tags:
-            - { name: 'app.corrector.token_cleaner', priority: 200 }
+            - { name: 'app.corrector.token_cleaner'}
 
     App\Service\CorrectorAdvertising\TokenRule\TokenSignSplitter:
         tags:
-            - { name: 'app.corrector.token_cleaner', priority: 100 }
+            - { name: 'app.corrector.token_cleaner'}
 
     App\Service\CorrectorAdvertising\SentenceRule\CarNegativeWordRule:
         tags:
-            - { name: 'app.corrector.sentence_rule', priority: 600 }
+            - { name: 'app.corrector.sentence_rule'}
 
     App\Service\Parser\CsvParser:
         tags:
-            - { name: 'app.parser.strategy', priority: 200 }
+            - { name: 'app.parser.strategy'}
 
     App\Service\Parser\TextParser:
         tags:
-            - { name: 'app.parser.strategy', priority: 100 }
+            - { name: 'app.parser.strategy'}
