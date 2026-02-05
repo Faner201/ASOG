@@ -1,0 +1,86 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    App\Service\CorrectorAdvertising\CorrectorAdvertisingSentenceInterface:
+        alias: App\Service\CorrectorAdvertising\CorrectorAdvertisingSentence
+
+    App\Service\CorrectorAdvertising\CorrectorAdvertisingSentence:
+        shared: false
+        public: true
+        arguments:
+            $tokenRules: !tagged_iterator app.corrector.token_rule
+            $tokenCleaners: !tagged_iterator app.corrector.token_cleaner
+
+    App\Service\CorrectorAdvertising\CorrectorAdvertisingSentenceFactory:
+        arguments:
+            $container: '@service_container'
+            $sentenceRules: !tagged_iterator app.corrector.sentence_rule
+
+    App\Service\AdvertisingSentenceGeneratorService:
+        arguments:
+            $parsers: !tagged_iterator app.parser.strategy
+
+    App\Service\CorrectorAdvertising\TokenRule\SignExtractionRule:
+        tags:
+            - { name: 'app.corrector.token_rule'}
+
+    App\Service\CorrectorAdvertising\TokenRule\EmptyCoreRule:
+        tags:
+            - { name: 'app.corrector.token_rule'}
+
+    App\Service\CorrectorAdvertising\TokenRule\NormalizedCoreRule:
+        tags:
+            - { name: 'app.corrector.token_rule'}
+
+    App\Service\CorrectorAdvertising\TokenRule\NegationRule:
+        tags:
+            - { name: 'app.corrector.token_rule'}
+
+    App\Service\CorrectorAdvertising\TokenRule\DuplicateFilterRule:
+        tags:
+            - { name: 'app.corrector.token_rule'}
+
+    App\Service\CorrectorAdvertising\TokenRule\PositiveFormattingRule:
+        tags:
+            - { name: 'app.corrector.token_rule'}
+
+    App\Service\CorrectorAdvertising\TokenRule\TokenCharacterFilter:
+        tags:
+            - { name: 'app.corrector.token_cleaner'}
+
+    App\Service\CorrectorAdvertising\TokenRule\TokenSignSplitter:
+        tags:
+            - { name: 'app.corrector.token_cleaner'}
+
+    App\Service\CorrectorAdvertising\SentenceRule\CarNegativeWordRule:
+        tags:
+            - { name: 'app.corrector.sentence_rule'}
+
+    App\Service\Parser\CsvParser:
+        tags:
+            - { name: 'app.parser.strategy'}
+
+    App\Service\Parser\TextParser:
+        tags:
+            - { name: 'app.parser.strategy'}
